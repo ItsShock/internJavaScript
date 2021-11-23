@@ -1,7 +1,7 @@
 .content
 {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 img
@@ -68,8 +68,9 @@ background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(210,210,210,1) 10
 .shoppingCart
 {
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content:space-around;
     border: 2px solid black;
     border-radius: 35px;
     width: 300px;
