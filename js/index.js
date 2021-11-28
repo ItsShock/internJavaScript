@@ -66,7 +66,14 @@ fetch("https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/data.j
             btnRemove.addEventListener("click", (e) => {
                 pizza.remove();
                 valueCurrency = valueCurrency - element.price;
-                totalPrice.innerText = "Całkowita cena: " + valueCurrency.toFixed(2);
+                if( valueCurrency != 0)
+                {
+                    totalPrice.innerText = "Całkowita cena: " + valueCurrency.toFixed(2);
+                }
+                else
+                {
+                    totalPrice.innerText = "Głodny? Zamów naszą pizzę";
+                }
             })
         })
 
