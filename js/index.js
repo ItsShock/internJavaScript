@@ -1,6 +1,8 @@
 fetch("https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/data.json")
 .then(data => data.json())
 .then(data => {
+    let valueCurrency = 0;
+    let id = 0;
     data.forEach(element => {
         const shoppingCart = document.querySelector(".shoppingCart");
         const pizzas = document.querySelector(".pizzas");
@@ -13,12 +15,11 @@ fetch("https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/data.j
         const totalPrice = document.querySelector(".totalPrice");
         
         box.className = "box";
-        ingredients.className = "ingredients"
+        ingredients.className = "ingredients";
         btn.className = "btn";
         
         img.src = element.image;
-        img.style.width = "250px";
-        img.style.height = "250px";
+        img.className = "img";
         
         title.innerHTML = element.title;
         
@@ -35,22 +36,40 @@ fetch("https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/data.j
         box.appendChild(btn);
         pizzas.appendChild(box);
 
-        let valueCurrency = 0;
 
-        btn.addEventListener("click", (e) =>{
+        btn.addEventListener("click", (e) => {
             valueCurrency = valueCurrency + element.price;
 
-            console.log(valueCurrency);
-            const pizzasList = document.createElement("li");
+            const pizza = document.createElement("div");
+            pizza.className = "pizzaList";
+            const pizzaLi = document.createElement("li");
+            pizzaLi.className = "pizzaLi";
             const pizzaPrice = document.createElement("p");
+            pizzaPrice.className = "pizzaPrice";
+            const btnRemove = document.createElement("button");
+            btnRemove.className = "btnRemove";
+            btnRemove.innerText = "X";
+            
+            pizzaLi.innerText = title.textContent;
             pizzaPrice.innerText = price.textContent;
+
+            pizza.id = id++;
+            console.log(pizza.id)
+            pizza.appendChild(pizzaLi);
+            pizza.appendChild(pizzaPrice);
+            pizza.appendChild(btnRemove);
             
             totalPrice.innerText = "Całkowita cena: " + valueCurrency.toFixed(2);
-            pizzasList.appendChild(pizzaPrice);
-            pizzasList.innerText = title.textContent + " " + price.textContent;
-            console.log(price.textContent)
-            shoppingCart.prepend(pizzasList);
+
+            shoppingCart.prepend(pizza);
+ 
+            btnRemove.addEventListener("click", (e) => {
+                pizza.remove();
+                valueCurrency = valueCurrency - element.price;
+                totalPrice.innerText = "Całkowita cena: " + valueCurrency.toFixed(2);
+            })
         })
+
     });
     
 })
