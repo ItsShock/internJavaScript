@@ -12,7 +12,7 @@ fetch("https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/data.j
         const ingredients = document.createElement("p");
         const price = document.createElement("h4");
         const btn = document.createElement("button");
-        const totalPrice = document.querySelector(".totalPrice");
+        const totalPrice = document.querySelector(".totalPrice"); 
         
         box.className = "box";
         ingredients.className = "ingredients";
